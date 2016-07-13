@@ -9,8 +9,13 @@ class wdf{
      */
     static public  function run(){
        spl_autoload_register("Wdf\Wdf::autoload");
-       $c = ucwords($_GET['c']); 
-       $a = $_GET['a'];
+       if(isset($_GET['c']) && isset($_GET['a'])  ){
+           $c = ucwords($_GET['c']);
+           $a = $_GET['a'];
+       }else{
+           $c = "Index";     
+           $a = "index";
+       }
        $controller = $c."Controller";
        $action = new $controller();
        $action->$a();
