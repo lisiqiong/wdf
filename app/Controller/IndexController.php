@@ -1,12 +1,15 @@
 <?php
 namespace app\Controller;
+use core\libs\controller;
+
 /**
  *wdf框架默认控制器
  **/
-class IndexController{
+class IndexController extends controller{
 	
 	public function index(){
-		p('看到这个说明框架运行正常');
+		$data = ['code'=>0,'msg'=>'success','data'=>['list'=>'这是数据']];
+		$this->outJson($data);
 	}
 	
 }

@@ -1,9 +1,7 @@
 <?php
-
 /**
  * @desc 应用启动初始化操作类
  * ***/
-
 namespace core;
 class app{
 	public static $classMap = [];	
@@ -12,10 +10,6 @@ class app{
 	 * @desc 启动应用
 	 * **/
 	static public  function start(){
-// 		//加载配置文件类，加载配置项
-// 		$conf = new \core\libs\config();
-// 		$conf->get('action', 'router');
-		
 		//启动路由类
 		$router = new \core\libs\router();		
 		$contrClass = ucfirst($router->controller).'Controller';

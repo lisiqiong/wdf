@@ -3,6 +3,7 @@
  * @desc 框架路由类
  * **/
 namespace core\libs;
+use core\libs\config;
 
 class router{
 	public $controller;//控制器类
@@ -26,7 +27,7 @@ class router{
 				$this->action = $routerArr[1];
 				unset($routerArr[1]);
 			}else{
-				$this->action = 'index';
+				$this->action = config::get('action', 'router');
 			}
 			$count = count($routerArr)+2;
 			$i = 2;
@@ -38,8 +39,8 @@ class router{
 			}
 		}else{
 			//如果域名没有参数默认为进入index控制器的index方法
-			$this->controller = 'index';
-			$this->action = 'index';	
+			$this->controller = config::get('contr', 'router');
+			$this->action = config::get('action', 'router');
 		}
 	}
 	
