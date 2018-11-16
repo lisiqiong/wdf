@@ -17,6 +17,9 @@ $cfgVar= get_cfg_var('env.name');
 $env = empty($cfgVar)?'dev':$cfgVar;
 define('ENVIRONMENT', $env);
 
+//引用composer
+include "./vendor/autoload.php";
+
 //引用公共方法文件
 require CORE.'/common/function.php';
 require CORE.'/app.php';

@@ -10,6 +10,9 @@ class app{
 	 * @desc 启动应用
 	 * **/
 	static public  function start(){
+		//加载日志类
+		\core\libs\log::init();
+				
 		//启动路由类
 		$router = new \core\libs\router();		
 		$contrClass = ucfirst($router->controller).'Controller';
@@ -19,6 +22,7 @@ class app{
 			include $controllerFile;
 			$contrClass = MODULE."\Controller\\".$contrClass;
 			$controller = new $contrClass();
+			\core\libs\log::log('controller:'.$router->controller.'   '.'action:'.$actionName);
 			$controller->$actionName();
 		}else{
 			throw new \Exception('not found controller '.$contrClass);
@@ -42,5 +46,5 @@ class app{
 			}			
 		}
 	}
-	
+		
 }

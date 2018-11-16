@@ -16,6 +16,8 @@ class router{
 	 * 3.返回对应的控制器和方法
 	 * **/
 	public function __construct(){
+		//获取路由的默认配置项信息
+		$routerConfig = config::get('router');
 		if(isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!='/' ){
 			$routers = ltrim($_SERVER['REQUEST_URI'],'/');
 			$routerArr = explode('/', $routers);			
@@ -27,7 +29,7 @@ class router{
 				$this->action = $routerArr[1];
 				unset($routerArr[1]);
 			}else{
-				$this->action = config::get('action', 'router');
+				$this->action = $routerConfig['default_action'];
 			}
 			$count = count($routerArr)+2;
 			$i = 2;
@@ -39,9 +41,9 @@ class router{
 			}
 		}else{
 			//如果域名没有参数默认为进入index控制器的index方法
-			$this->controller = config::get('contr', 'router');
-			$this->action = config::get('action', 'router');
-		}
+			$this->controller = $routerConfig['default_contr'];
+			$this->action = $routerConfig['default_action'];
+		}		
 	}
 	
 	

@@ -5,9 +5,9 @@ class config{
 	static public $conf = array();
 	
 	/**
-	 * @desc 获取某个配置文件的单个配置项
+	 * @desc 获取某个配置文件的单个配置项,默认获取config文件的
 	 * **/
-	static public function get($name,$file){
+	static public function get($name,$file='config'){
 		if(isset(self::$conf[$file])){
 			return self::$conf[$file][$name];
 		}else{
@@ -29,7 +29,7 @@ class config{
 	/**
 	 * @desc 获取指定配置文件的所有配置信息
 	 * **/
-	static public function all($file){
+	static public function all($file='config'){
 		if(isset(self::$conf[$file])){
 			return self::$conf[$file];
 		}else{
