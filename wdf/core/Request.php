@@ -7,6 +7,11 @@
 class Request{
     public function __construct()
     {
-        echo "Request<br/>";
+//        echo "Request<br/>";
     }
+
+    public function init(){
+        echo "request is ok<br/>";
+    }
+
 }

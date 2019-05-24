@@ -1,8 +1,8 @@
 <?php
 /*
- * @desc 核心加载器
+ * @desc 核心加载器,类和文件记载器
  */
-class Core{
+class Loader{
     //需要加载对象数组
     private static $_objlist=[];
     //标示的调用方法为静态
@@ -44,11 +44,17 @@ class Core{
      * @desc 依次执行需要加载的对象
      */
     public static function doObj(){
+        //取出数组中的第一组数据
         $objArr = array_shift(self::$_objlist);
+        //获取类名
         $className = $objArr[0];
+        //获取方法名称
         $funcNmae = $objArr[1];
+        //获取参数信息
         $params = $objArr[2];
+        //获取调用类型，是静态直接调用，还是对象调用方法，还是单例模式的方法调用
         $type = $objArr[3];
+        //使用call_user_func_array方法调用类对应的方法
         if($type==self::_STATIC){
             call_user_func_array([$className,$funcNmae],$params);
         }elseif ($type==self::_OBJECT){
@@ -60,51 +66,3 @@ class Core{
         }
     }
 }
-
-class B{
-    public static function  init(){
-        echo "b init<br/>";
-    }
-}
-
-class C{
-    public  function add($name,$age=null){
-        echo "c add name:{$name} , age:{$age}<br/>";
-    }
-}
-
-class D{
-    private static $_instance;
-
-    private function __construct()
-    {
-    }
-
-    private function __clone()
-    {
-        // TODO: Implement __clone() method.
-    }
-
-    /**
-     * @desc 获取实例化对象的入口
-     */
-    public static function getInstance(){
-        if(!(self::$_instance instanceof D)){
-            self::$_instance = new D();
-        }
-        return self::$_instance;
-    }
-
-    public function show(){
-        echo "this is single func<br/>";
-    }
-
-}
-
-Core::unshiftObj(['B','init',[],Core::_STATIC]);
-Core::unshiftObj(['C','add',['思琼哈哈哈',33],Core::_OBJECT]);
-Core::unshiftObj(["D","show",[],Core::_SIGNLE]);
-while (Core::listen()){
-    Core::doObj();
-}
-

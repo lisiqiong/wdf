@@ -7,6 +7,10 @@
 class Router{
     public function __construct()
     {
-        echo "router<br/>";
+//        echo "router<br/>";
+    }
+
+    public function init(){
+        echo "router is ok <br/>";
     }
 }

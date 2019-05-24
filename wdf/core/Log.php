@@ -5,8 +5,7 @@
  * Class Log
  */
 class Log{
-    public function __construct()
-    {
-        echo "log<br/>";
+    public function init(){
+        echo "log is ok <br/>";
     }
 }

@@ -7,6 +7,12 @@
 class Response{
     public function __construct()
     {
-        echo "Response<br/>";
+//        echo "Response<br/>";
     }
+
+
+    public function init(){
+        echo "response is ok<br/>";
+    }
+
 }

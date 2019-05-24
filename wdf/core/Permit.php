@@ -5,8 +5,7 @@
  * Class Permit
  */
 class Permit{
-    public function __construct()
-    {
-        echo "Permit<br/>";
+    public function init(){
+        echo "permit is ok <br/>";
     }
 }
