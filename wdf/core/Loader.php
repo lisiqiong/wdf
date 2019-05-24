@@ -1,7 +1,11 @@
 <?php
 /*
  * @desc 核心加载器,类和文件记载器
+ * 1.加载核心类
+ * 2.加载配置文件
+ * 3.记载第三方依赖（composer）
  */
+namespace wdf\core;
 class Loader{
     //需要加载对象数组
     private static $_objlist=[];
@@ -16,8 +20,8 @@ class Loader{
      * @desc 在对象前添加对象
      * @param $array
      */
-    public static function unshiftObj($array){
-        array_unshift(self::$_objlist,$array);
+    public static function unshiftObj($className,$func='init',$params=[],$type=self::_OBJECT){
+        array_unshift(self::$_objlist,[$className,$func,$params,$type]);
     }
 
     /***
@@ -36,8 +40,8 @@ class Loader{
      * @desc 向对象末尾加入对象
      * @param $array
      */
-    public static function pushObj($array){
-        array_push(self::$_objlist,$array);
+    public static function pushObj($className,$func='init',$params=[],$type=self::_OBJECT){
+        array_push(self::$_objlist,[$className,$func,$params,$type]);
     }
 
     /**
@@ -54,6 +58,13 @@ class Loader{
         $params = $objArr[2];
         //获取调用类型，是静态直接调用，还是对象调用方法，还是单例模式的方法调用
         $type = $objArr[3];
+
+        //加载类库文件
+        include CORE_PATH.$className.".php";
+
+        //使用命名空间后类要使用命名空间的方式使用
+        $className = "wdf\core\\".$className;
+
         //使用call_user_func_array方法调用类对应的方法
         if($type==self::_STATIC){
             call_user_func_array([$className,$funcNmae],$params);
@@ -65,4 +76,15 @@ class Loader{
             call_user_func_array([$signleObj,$funcNmae],$params);
         }
     }
+
+    /**
+     * @desc 加载类实现拦截
+     * 保留返回信息和日志的记录
+     */
+    public  static function clear(){
+        self::$_objlist = [];
+        self::pushObj("Response");
+        self::pushObj("Log");
+    }
+
 }

@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @desc 核心路由类
  * Class Router
  */
+namespace wdf\core;
 class Router{
     public function __construct()
     {
