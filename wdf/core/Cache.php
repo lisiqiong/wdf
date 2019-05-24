@@ -10,7 +10,7 @@ class Cache{
     }
 
     public function init(){
-        echo "init is ok <br/>";
+        echo "cache is ok <br/>";
     }
 
 }

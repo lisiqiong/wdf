@@ -3,7 +3,11 @@
  * @desc 核心加载器,类和文件记载器
  * 1.加载核心类
  * 2.加载配置文件
- * 3.记载第三方依赖（composer）
+ * 3.记载控制器文件
+ * 4.加载数据模型文件
+ * 5.记载视图文件
+ * 6.加载第三方依赖（composer）
+ *
  */
 namespace wdf\core;
 class Loader{
@@ -15,6 +19,8 @@ class Loader{
     const _OBJECT=2;
     //标示方法为静态的
     const _SIGNLE=3;
+
+    private static $_config=[];
 
     /**
      * @desc 在对象前添加对象
@@ -85,6 +91,34 @@ class Loader{
         self::$_objlist = [];
         self::pushObj("Response");
         self::pushObj("Log");
+    }
+
+    /**
+     * @desc 加载配置文件获取配置信息
+     * @param $file
+     * @param $key
+     */
+    public static function C($file,$key=null){
+        if(isset(self::$_config[$file])){
+            if(empty($key)){
+                return self::$_config[$file];
+            }else{
+                //$key是数组的情况
+                if(is_array($key)){
+                    $conf = self::$_config[$file];
+                    foreach($key as $k=>$v){
+                        $conf = $conf[$v];
+                    }
+                    return $conf;
+                }else{
+                    return self::$_config[$file][$key];
+                }
+            }
+        }else{
+            $info = include WDF_PATH.'config'.DS.$file.".php";
+            self::$_config[$file] = $info;
+            return self::C($file,$key);
+        }
     }
 
 }
