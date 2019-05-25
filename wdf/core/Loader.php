@@ -7,7 +7,6 @@
  * 4.加载数据模型文件
  * 5.记载视图文件
  * 6.加载第三方依赖（composer）
- *
  */
 namespace wdf\core;
 class Loader{
@@ -19,7 +18,7 @@ class Loader{
     const _OBJECT=2;
     //标示方法为静态的
     const _SIGNLE=3;
-
+    //配置文件信息
     private static $_config=[];
 
     /**
