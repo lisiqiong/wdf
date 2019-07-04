@@ -75,15 +75,39 @@ class Router{
         return self::$_router->action;
     }
 
-
     /**
-     * @desc 设置路由
+     * @desc 响应式路由
      */
     private  function setRouter(){
-        $this->module = $_GET['module'];
-        $this->controller = $_GET['controller'];
-        $this->action = $_GET['action'];
+        $pathinfo = Loader::C('config','pathinfo');
+        $module = '';
+        $controller = '';
+        $action = '';
+        if($pathinfo==1){
+            $module = isset($_GET['m'])?$_GET['m']:Loader::C('config',['default_router','module']);
+            $controller = isset($_GET['c'])?$_GET['c']:Loader::C('config',['default_router','controller']);
+            $action = isset($_GET['a'])?$_GET['a']:Loader::C('config',['default_router','action']);
+        }else{
+            $urlArr = explode('/',$_SERVER['REQUEST_URI']);
+            $module = isset($urlArr[3])?$urlArr[3]:Loader::C('config',['default_router','module']);
+            $controller = isset($urlArr[4])?$urlArr[4]:Loader::C('config',['default_router','controller']);
+            $action = isset($urlArr[5])?$urlArr[5]:Loader::C('config',['default_router','action']);
+        }
+        $this->module = $module;
+        $this->controller = $controller;
+        $this->action = $action;
     }
+
+    /**
+     * @desc 配置式路由
+     */
+//    private function setRouter(){
+//        $routering = Loader::C('routering');
+//
+//    }
+
+
+
 
 
 }

@@ -4,7 +4,7 @@
  * @desc 默认index控制器
  * Class IndexController
  */
-namespace app\index;
+namespace app\admin;
 class IndexController{
 
     /**

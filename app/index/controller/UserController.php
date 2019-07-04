@@ -1,5 +1,5 @@
 <?php
-
+namespace app\index;
 /**
  * @desc 用户管理控制器
  * Class UserController

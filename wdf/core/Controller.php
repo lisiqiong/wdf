@@ -14,7 +14,7 @@ class Controller{
         $action = Router::getAction();
         $controller = ucfirst($controller).'Controller';
         include APP_PATH.$module.DS.'controller'.DS.$controller.'.php';
-        $class = '\\'.$controller;
+        $class = 'app\index\\'.$controller;
         $c = new $class();
         $c->$action();
     }

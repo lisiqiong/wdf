@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    //mysql数据库配置信息
     'database'=>[
         'host'=>'localhost',
         'user'=>'root',
@@ -8,5 +9,24 @@ return array(
         'password'=>'',
         'port'=>3306,
     ],
-    'bebug'=>true,
+    //默认访问的路由
+    'default_router'=>[
+        'module'=>'index',
+        'controller'=>'index',
+        'action'=>'show'
+    ],
+    "routering"=>[
+        'index.php'=>[
+            'module'=>'index',
+            'controller'=>'index',
+            'action'=>'show'
+        ],
+        'admin.php'=>[
+            'module'=>'index',
+            'controller'=>'index',
+            'action'=>'show'
+        ],
+    ],
+    "pathinfo"=>2,
+///路由方式1.普通路由，2index.php?/index/index/index
 );
