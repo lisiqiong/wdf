@@ -10,7 +10,7 @@ define("CORE_PATH",ROOT_PATH.DS.'wdf'.DS."core".DS);
 define("APP_PATH",ROOT_PATH.DS.'app'.DS);
 
 //加载数据请求类
-Loader::unshiftObj("Request","init",[],Loader::_SIGNLE);
+Loader::unshiftObj("Request","init",[],Loader::_STATIC);
 //加载路由类
 Loader::pushObj("Router","init",[],Loader::_SIGNLE);
 //加载权限处理

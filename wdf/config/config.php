@@ -9,24 +9,28 @@ return array(
         'password'=>'',
         'port'=>3306,
     ],
-    //默认访问的路由
-    'default_router'=>[
-        'module'=>'index',
-        'controller'=>'index',
-        'action'=>'show'
-    ],
+//    //默认访问的路由
+//    'default_router'=>[
+//        'module'=>'index',
+//        'controller'=>'index',
+//        'action'=>'show'
+//    ],
     "routering"=>[
         'index.php'=>[
             'module'=>'index',
             'controller'=>'index',
-            'action'=>'show'
+            'action'=>'index'
         ],
         'admin.php'=>[
-            'module'=>'index',
+            'module'=>'admin',
             'controller'=>'index',
-            'action'=>'show'
+            'action'=>'index'
         ],
     ],
-    "pathinfo"=>2,
+//    "pathinfo"=>2,
 ///路由方式1.普通路由，2index.php?/index/index/index
+    'history'=>[
+        'sethistory'=>true,
+        'number'=>5
+    ]
 );

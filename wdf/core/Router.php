@@ -78,36 +78,39 @@ class Router{
     /**
      * @desc 响应式路由
      */
-    private  function setRouter(){
-        $pathinfo = Loader::C('config','pathinfo');
-        $module = '';
-        $controller = '';
-        $action = '';
-        if($pathinfo==1){
-            $module = isset($_GET['m'])?$_GET['m']:Loader::C('config',['default_router','module']);
-            $controller = isset($_GET['c'])?$_GET['c']:Loader::C('config',['default_router','controller']);
-            $action = isset($_GET['a'])?$_GET['a']:Loader::C('config',['default_router','action']);
-        }else{
-            $urlArr = explode('/',$_SERVER['REQUEST_URI']);
-            $module = isset($urlArr[3])?$urlArr[3]:Loader::C('config',['default_router','module']);
-            $controller = isset($urlArr[4])?$urlArr[4]:Loader::C('config',['default_router','controller']);
-            $action = isset($urlArr[5])?$urlArr[5]:Loader::C('config',['default_router','action']);
-        }
-        $this->module = $module;
-        $this->controller = $controller;
-        $this->action = $action;
-    }
-
-    /**
-     * @desc 配置式路由
-     */
-//    private function setRouter(){
-//        $routering = Loader::C('routering');
-//
+//    private  function setRouter(){
+//        $pathinfo = Loader::C('config','pathinfo');
+//        $module = '';
+//        $controller = '';
+//        $action = '';
+//        if($pathinfo==1){
+//            $module = isset($_GET['m'])?$_GET['m']:Loader::C('config',['default_router','module']);
+//            $controller = isset($_GET['c'])?$_GET['c']:Loader::C('config',['default_router','controller']);
+//            $action = isset($_GET['a'])?$_GET['a']:Loader::C('config',['default_router','action']);
+//        }else{
+//            $urlArr = explode('/',$_SERVER['REQUEST_URI']);
+//            $module = isset($urlArr[3])?$urlArr[3]:Loader::C('config',['default_router','module']);
+//            $controller = isset($urlArr[4])?$urlArr[4]:Loader::C('config',['default_router','controller']);
+//            $action = isset($urlArr[5])?$urlArr[5]:Loader::C('config',['default_router','action']);
+//        }
+//        $this->module = $module;
+//        $this->controller = $controller;
+//        $this->action = $action;
 //    }
 
-
-
-
+    /**
+     * @desc 响应式路由
+     */
+    private function setRouter(){
+        $pathinfo = Loader::C('config','routering');
+        if(Request::getUri()==""){
+            $urlArr = [];
+        }else{
+            $urlArr = explode("/",Request::getUri());
+        }
+        $this->module = isset($urlArr[0])?$urlArr[0]:$pathinfo[Request::getFile()]['module'];
+        $this->controller = isset($urlArr[1])?$urlArr[1]:$pathinfo[Request::getFile()]['controller'];
+        $this->action = isset($urlArr[2])?$urlArr[2]:$pathinfo[Request::getFile()]['action'];
+    }
 
 }
